@@ -1,0 +1,27 @@
+Copyright (c) 2024 Bowen Yang <byangar@connect.ust.hk>, Jie Cheng <jchengai@connect.ust.hk>
+
+PCT_planner contains several third party libraries, with documentation of licensing
+and modifications as follows:
+
+- gtsam 4.1.1: Georgia Tech Smoothing and Mapping Library
+    - Removed unused cmake files and example data
+    - Licenced under BSD, provided in PCT_planner/planner/lib/3rdparty/gtsam-4.1.1/LICENSE.BSD
+- osqp: The Operator Splitting QP Solver
+    - Modified osqp/include/constants.h, osqp/include/osqp_configure.h
+    - Licenced under Apache License v 2.0, provided in PCT_planner/planner/lib/3rdparty/osqp/LICENSE
+- pybind11: Seamless operability between C++11 and Python
+    - Licenced provided in PCT_planner/planner/lib/3rdparty/pybind11/LICENSE
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
