@@ -8,21 +8,30 @@
 #include "trajectory_optimization/gpmp_optimizer/gpmp_optimizer.h"
 #include "trajectory_optimization/gpmp_optimizer/gpmp_optimizer_wnoa.h"
 
-class OfflineElePlanner {
- public:
+class OfflineElePlanner
+{
+public:
   OfflineElePlanner(const double max_heading_rate, bool use_quintic)
       : use_quintic_(use_quintic), max_heading_rate_(max_heading_rate) {}
   ~OfflineElePlanner() = default;
 
-  void InitMap(const double a_start_cost_threshold,
-               const double safe_cost_margin, const double resolution,
-               const int num_layers, const double step_cost_weight, const Eigen::MatrixXd& cost_map,
-               const Eigen::MatrixXd& height_map,
-               const Eigen::MatrixXd& ceiling, const Eigen::MatrixXd& ele_map,
-               const Eigen::MatrixXd& grad_x, const Eigen::MatrixXd& grad_y);
+  void InitMap(
+      const double a_start_cost_threshold,
+      const double safe_cost_margin,
+      const double resolution,
+      const int num_layers,
+      const double step_cost_weight,
+      const Eigen::Ref<const Eigen::MatrixXd> &cost_map,
+      const Eigen::Ref<const Eigen::MatrixXd> &height_map,
+      const Eigen::Ref<const Eigen::MatrixXd> &ceiling,
+      const Eigen::Ref<const Eigen::MatrixXd> &ele_map,
+      const Eigen::Ref<const Eigen::MatrixXd> &grad_x,
+      const Eigen::Ref<const Eigen::MatrixXd> &grad_y);
 
-  bool Plan(const Eigen::Vector3i& start, const Eigen::Vector3i& goal,
-            const bool optimize = true);
+  bool Plan(
+      Eigen::Ref<const Eigen::Vector3i> &start,
+      Eigen::Ref<const Eigen::Vector3i> &goal,
+      const bool optimize = true);
 
   void SetReferenceHeight(const double height) {
     trajectory_optimizer_wnoj_.SetReferenceHeight(height);
@@ -51,7 +60,7 @@ class OfflineElePlanner {
     return trajectory_optimizer_wnoj_;
   }
 
- private:
+private:
   double max_heading_rate_ = 0.5;
   bool use_quintic_ = false;
 
