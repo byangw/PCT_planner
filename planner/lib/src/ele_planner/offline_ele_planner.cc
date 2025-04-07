@@ -1,11 +1,18 @@
 #include "ele_planner/offline_ele_planner.h"
 
 void OfflineElePlanner::InitMap(
-    const double a_start_cost_threshold, const double safe_cost_margin,
-    const double resolution, const int num_layers, const double step_cost_weight,
-    const Eigen::MatrixXd& cost_map, const Eigen::MatrixXd& height_map,
-    const Eigen::MatrixXd& ceiling, const Eigen::MatrixXd& ele_map,
-    const Eigen::MatrixXd& grad_x, const Eigen::MatrixXd& grad_y) {
+    const double a_start_cost_threshold,
+    const double safe_cost_margin,
+    const double resolution,
+    const int num_layers,
+    const double step_cost_weight,
+    const Eigen::Ref<const Eigen::MatrixXd> &cost_map,
+    const Eigen::Ref<const Eigen::MatrixXd> &height_map,
+    const Eigen::Ref<const Eigen::MatrixXd> &ceiling,
+    const Eigen::Ref<const Eigen::MatrixXd> &ele_map,
+    const Eigen::Ref<const Eigen::MatrixXd> &grad_x,
+    const Eigen::Ref<const Eigen::MatrixXd> &grad_y)
+{
   path_finder_.Init(a_start_cost_threshold, num_layers, resolution, step_cost_weight, cost_map,
                     height_map, ele_map);
   map_ = std::make_shared<DenseElevationMap>();
@@ -16,9 +23,13 @@ void OfflineElePlanner::InitMap(
       GPMPOptimizer(safe_cost_margin, max_heading_rate_, map_);
 }
 
-bool OfflineElePlanner::Plan(const Eigen::Vector3i& start,
-                             const Eigen::Vector3i& goal, const bool optimize) {
-  if (!path_finder_.Search(start, goal)) {
+bool OfflineElePlanner::Plan(
+    Eigen::Ref<const Eigen::Vector3i> &start,
+    Eigen::Ref<const Eigen::Vector3i> &goal,
+    const bool optimize)
+{
+  if (!path_finder_.Search(start, goal))
+  {
     printf("A star Failed!\n");
     return false;
   }
